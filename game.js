@@ -254,11 +254,14 @@ function updateLeaderboard() {
 // --- Drawing Functions ---
 function drawBoard() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  // Draw cells
+  // Draw cells with correct zig-zag numbering
   for (let i = 0; i < 100; i++) {
-    let x = (i % boardSize) * cellSize;
-    let y = canvas.height - Math.floor(i / boardSize + 1) * cellSize;
-    let colorIdx = Math.floor(i / boardSize) % 2;
+    let row = Math.floor(i / boardSize);
+    let col = i % boardSize;
+    let displayCol = row % 2 === 0 ? col : boardSize - 1 - col;
+    let x = displayCol * cellSize;
+    let y = canvas.height - (row + 1) * cellSize;
+
     // Highlight start and finish
     if (i + 1 === 1) {
       ctx.fillStyle = "#e0ffe0";
@@ -279,7 +282,7 @@ function drawBoard() {
       ctx.fillStyle = "#d32f2f";
       ctx.fillText("100 🏁", x + 8, y + 28);
     } else {
-      ctx.fillStyle = themes[selectedTheme].boardColors[(colorIdx + i) % 2];
+      ctx.fillStyle = themes[selectedTheme].boardColors[(row + col) % 2];
       ctx.fillRect(x, y, cellSize, cellSize);
       ctx.strokeStyle = "#222";
       ctx.lineWidth = 2.2;
@@ -317,8 +320,9 @@ function getCellCoords(pos) {
   let n = pos - 1;
   let row = Math.floor(n / boardSize);
   let col = n % boardSize;
-  if (row % 2 === 1) col = boardSize - 1 - col;
-  let x = col * cellSize;
+  // Zig-zag: reverse col for odd rows
+  let displayCol = row % 2 === 0 ? col : boardSize - 1 - col;
+  let x = displayCol * cellSize;
   let y = canvas.height - (row + 1) * cellSize;
   return { x, y };
 }
