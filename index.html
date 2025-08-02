@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Snake & Ladder Premium</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="bg-gradient"></div>
+  <div id="dark-toggle">
+    <label>
+      <input type="checkbox" id="darkmode-switch">
+      <span>🌙 Dark Mode</span>
+    </label>
+  </div>
+  <div id="setup-screen">
+    <div id="logo">
+      <span style="font-size:2.7rem;">🎲</span>
+      <span style="font-size:2.3rem; font-weight:bold;">Snake & Ladder Premium</span>
+      <div id="tagline">A modern multiplayer experience</div>
+    </div>
+    <form id="player-form">
+      <div class="setup-row">
+        <label>Choose Board Theme:</label>
+        <select id="theme-select">
+          <option value="classic">Classic</option>
+          <option value="night">Night</option>
+          <option value="horror">Horror</option>
+        </select>
+      </div>
+      <div class="setup-row">
+        <label>Number of Players:</label>
+        <select id="player-count">
+          <option value="2">2 Players</option>
+          <option value="3">3 Players</option>
+          <option value="4">4 Players</option>
+        </select>
+      </div>
+      <div id="player-names"></div>
+      <button type="submit" id="start-game" class="main-btn">Start Game 🚀</button>
+    </form>
+    <div style="margin: 18px 0;">
+      <button id="how-to-play-btn" class="secondary-btn">How to Play?</button>
+    </div>
+    <div id="credits">
+      <a href="https://github.com/adityanull" target="_blank" class="github-link">
+        <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" width="22" style="vertical-align:middle; margin-right:6px;">
+        <span>@adityanull</span>
+      </a>
+    </div>
+    <footer>
+      <span style="color:#aaa; font-size:0.95rem;">&copy; 2024 Snake & Ladder Premium</span>
+    </footer>
+  </div>
+  <div id="game-container" style="display:none;">
+    <div id="game-flex">
+      <div id="leaderboard"></div>
+      <div>
+        <div id="turn-indicator"></div>
+        <div id="dice-roller">
+          <div id="dice-cube" class="dice-face">🎲</div>
+        </div>
+        <div id="powerups-bar"></div>
+        <canvas id="board" width="600" height="600"></canvas>
+        <div id="controls">
+          <button id="roll-dice">🎲 Roll Dice</button>
+          <div id="dice-result"></div>
+          <div id="status"></div>
+          <button id="restart-game" style="display:none;">Restart</button>
+        </div>
+        <div id="move-history"></div>
+      </div>
+    </div>
+  </div>
+  <div id="how-to-play-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:1000; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:32px 24px; border-radius:14px; max-width:400px; text-align:left; position:relative;">
+      <button id="close-how-to-play" style="position:absolute; top:10px; right:14px; background:none; border:none; font-size:1.5rem; cursor:pointer;">✖️</button>
+      <h2 style="margin-top:0;">How to Play</h2>
+      <ul style="padding-left:18px;">
+        <li>Choose your board theme and number of players (2-4).</li>
+        <li>Enter your player names and pick your avatar.</li>
+        <li>Players take turns rolling the dice and moving their token.</li>
+        <li>Land on a ladder to climb up, or a snake to slide down!</li>
+        <li>If you land on another player, they go back to start (Battle Mode).</li>
+        <li>Use power-ups for a twist!</li>
+        <li>First to reach 100 wins!</li>
+      </ul>
+      <div style="margin-top:10px; font-size:0.95rem; color:#666;">
+        Enjoy the premium experience! 🎉
+      </div>
+    </div>
+  </div>
+  <div id="win-modal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.7); z-index:2000; justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:38px 30px; border-radius:18px; max-width:420px; text-align:center; position:relative; box-shadow:0 8px 32px #0008;">
+      <div style="font-size:2.5rem; margin-bottom:10px;">🏆</div>
+      <div id="win-message" style="font-size:1.5rem; font-weight:bold; color:#222; margin-bottom:10px;"></div>
+      <div style="font-size:1.1rem; color:#666;">You won <b>adityanull's</b> game!<br>Play again or share your victory!</div>
+      <button id="close-win-modal" style="margin-top:18px; font-size:1.1rem; padding:8px 24px; border-radius:8px; border:none; background:#ffeb3b; font-weight:bold; cursor:pointer;">Play Again</button>
+    </div>
+  </div>
+  <!-- Sound effects -->
+  <audio id="sfx-dice" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7b2.mp3"></audio>
+  <audio id="sfx-snake" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7b2.mp3"></audio>
+  <audio id="sfx-ladder" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7b2.mp3"></audio>
+  <audio id="sfx-win" src="https://cdn.pixabay.com/audio/2022/07/26/audio_124bfae7b2.mp3"></audio>
+  <script src="game.js"></script>
+</body>
+</html>
